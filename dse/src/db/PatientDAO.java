@@ -1,16 +1,11 @@
 package db;
 
-import model.Hospital;
-import model.Operation;
 import model.Patient;
-import model.TimeSlot;
-import model.User;
 import util.Config;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 
 public class PatientDAO extends BasicDAO {

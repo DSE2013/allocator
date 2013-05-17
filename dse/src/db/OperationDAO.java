@@ -1,12 +1,10 @@
 package db;
 
 import model.Operation;
-import model.TimeSlot;
 import util.Config;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 
 public class OperationDAO extends BasicDAO {
@@ -29,11 +27,12 @@ public class OperationDAO extends BasicDAO {
 	}
 
 	public void persist(Operation o) {
-		BasicDBObject obj = new BasicDBObject("id", getHighestIndex())
+		BasicDBObject obj = new BasicDBObject("id", getNewIndex())
 				.append("operationTypeId", o.getOperationTypeId())
 				.append("doctorId", o.getDoctorId())
 				.append("patientId", o.getPatientId());
 		collection.insert(obj);
+		o.setId((Integer) obj.get("id"));
 		collection.ensureIndex("id");
 	}
 

@@ -1,15 +1,10 @@
 package db;
 
-import model.Hospital;
-import model.Operation;
-import model.TimeSlot;
 import model.User;
 import util.Config;
 
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 
 public class UserDAO extends BasicDAO {
@@ -33,7 +28,7 @@ public class UserDAO extends BasicDAO {
 	}
 
 	public void persist(User u) {
-		BasicDBObject obj = new BasicDBObject("id", getHighestIndex())
+		BasicDBObject obj = new BasicDBObject("id", getNewIndex())
 				.append("name", u.getName())
 				.append("email", u.getEmail())
 				.append("password", u.getPassword());

@@ -1,20 +1,18 @@
 package db;
 
 import model.Hospital;
-import model.Operation;
-import model.TimeSlot;
 import util.Config;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 
 public class HospitalDAO extends BasicDAO {
 	public HospitalDAO(DB db) {
 		collection = db.getCollection(Config.DB_COLLECTION_HOSPITAL);
 		collection.ensureIndex("id");
+		collection.ensureIndex(new BasicDBObject("location", "2d"));
 	}
 
 	public Hospital findById(int id) {
@@ -33,7 +31,7 @@ public class HospitalDAO extends BasicDAO {
 	}
 
 	public void persist(Hospital h) {
-		BasicDBObject obj = new BasicDBObject("id", getHighestIndex())
+		BasicDBObject obj = new BasicDBObject("id", getNewIndex())
 				.append("name", h.getName())
 				.append("location", new Double[] {h.getLatitude(), h.getLongitude()});
 		h.setId(obj.getInt("id"));

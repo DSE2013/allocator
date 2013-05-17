@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import util.Config;
 import model.TimeSlot;
+import util.Config;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.WriteResult;
 
 public class TimeSlotDAO extends BasicDAO {
 	public TimeSlotDAO(DB db) {
 		collection = db.getCollection(Config.DB_COLLECTION_SLOT);
+		collection.ensureIndex("id");
 	}
 
 	public TimeSlot findById(int id) {
@@ -42,13 +41,13 @@ public class TimeSlotDAO extends BasicDAO {
 	}
 
 	public void persist(TimeSlot ts) {
-		BasicDBObject obj = new BasicDBObject("id", getHighestIndex())
+		BasicDBObject obj = new BasicDBObject("id", getNewIndex())
 				.append("start", ts.getStart()).append("end", ts.getEnd())
 				.append("hospitalId", ts.getHospitalId())
 				.append("operationTypeId", ts.getOperationTypeId())
 				.append("operationId", ts.getOperationId());
+		ts.setId((Integer) obj.get("id"));
 		collection.insert(obj);
-		collection.ensureIndex("id");
 	}
 
 	public void update(TimeSlot ts) {
@@ -59,7 +58,6 @@ public class TimeSlotDAO extends BasicDAO {
 				.append("operationTypeId", ts.getOperationTypeId())
 				.append("operationId", ts.getOperationId());
 		collection.findAndModify(example, update);
-		collection.ensureIndex("id");
 	}
 
 	public List<TimeSlot> findAll() {
@@ -106,19 +104,13 @@ public class TimeSlotDAO extends BasicDAO {
 		while (cur.hasNext()) {
 			DBObject obj1 = cur.next();
 			if (obj1 != null) {
-				Integer i = (Integer) obj1.get("id");
-				Date s = (Date) obj1.get("start");
-				Date e = (Date) obj1.get("end");
-				Integer hId = (Integer) obj1.get("hospitalId");
-				Integer otId = (Integer) obj1.get("operationTypeId");
-				Integer oId = (Integer) obj1.get("operationId");
 				TimeSlot ts = new TimeSlot();
-				ts.setId(i);
-				ts.setStart(s);
-				ts.setEnd(e);
-				ts.setHospitalId(hId);
-				ts.setOperationId(oId);
-				ts.setOperationTypeId(otId);
+				ts.setId((Integer) obj1.get("id"));
+				ts.setStart((Date) obj1.get("start"));
+				ts.setEnd((Date) obj1.get("end"));
+				ts.setHospitalId((Integer) obj1.get("hospitalId"));
+				ts.setOperationId((Integer) obj1.get("operationId"));
+				ts.setOperationTypeId((Integer) obj1.get("operationTypeId"));
 				tsList.add(ts);
 			}
 		}

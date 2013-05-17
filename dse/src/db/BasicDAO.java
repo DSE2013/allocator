@@ -8,7 +8,7 @@ import com.mongodb.DBObject;
 public abstract class BasicDAO {
 	protected DBCollection collection;
 	
-	protected Integer getHighestIndex() {
+	protected Integer getNewIndex() {
 		DBCursor cur = collection.find().sort(new BasicDBObject("id", -1)).limit(1);
 		if(!cur.hasNext())
 			return 1;

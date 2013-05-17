@@ -1,11 +1,6 @@
 package db;
 
-import java.net.UnknownHostException;
-
-import util.Config;
-
 import com.mongodb.DB;
-import com.mongodb.Mongo;
 
 public class DAOFactory {
 	private DB db;
@@ -28,5 +23,13 @@ public class DAOFactory {
 	
 	public PatientDAO getPatientDAO() {
 		return new PatientDAO(db);
+	}
+	
+	public OperationTypeDAO getOperationTypeDAO() {
+		return new OperationTypeDAO(db);
+	}
+	
+	public DoctorDAO getDoctorDAO() {
+		return new DoctorDAO(db);
 	}
 }
