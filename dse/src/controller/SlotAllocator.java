@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import model.Operation;
@@ -35,11 +37,11 @@ public class SlotAllocator {
 	}
 
 	public TimeSlot getNearestSlot(Integer patientId, Integer operationTypeId,
-			Double maxDistance) {
+			Double maxDistance, Integer lengthInMin) {
 		Patient p = pDao.findById(patientId);
 
 		if (p == null) {
-			System.out.println("patient not found");
+			System.out.println("patient not found " + patientId);
 			return null;
 		}
 
@@ -64,11 +66,17 @@ public class SlotAllocator {
 			TimeSlot example = new TimeSlot();
 			example.setHospitalId((Integer) dbObj.get("id"));
 			List<TimeSlot> tsList = tsDao.findByExample(example);
+			Collections.sort(tsList, new Comparator<TimeSlot>() {
+				public int compare(TimeSlot o1, TimeSlot o2) {
+					return (int) (o2.getStart().getTime() - o1.getStart().getTime());
+				}
+			});
 			for (TimeSlot ts : tsList) {
 				// if operation type fits and no operation is already assigned
 				// -> return timeslot
+				long lengthInMinTs = (ts.getEnd().getTime()-ts.getStart().getTime())/1000/60;
 				if (ts.getOperationTypeId() == operationTypeId
-						&& ts.getOperationId() == null) {
+						&& ts.getOperationId() == null && lengthInMinTs > lengthInMin) {
 					return ts;
 				}
 			}

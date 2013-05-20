@@ -5,6 +5,7 @@ public class AllocationMessage extends Message {
 
 	private double maxDistance;
 	private int operationTypeId;
+	private int lengthInMin;
 	
 	public int getOperationTypeId() {
 		return operationTypeId;
@@ -20,5 +21,13 @@ public class AllocationMessage extends Message {
 
 	public void setMaxDistance(double maxDistance) {
 		this.maxDistance = maxDistance;
+	}
+
+	public int getLengthInMin() {
+		return lengthInMin;
+	}
+
+	public void setLengthInMin(int lengthInMin) {
+		this.lengthInMin = lengthInMin;
 	}
 }

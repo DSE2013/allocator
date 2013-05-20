@@ -1,18 +1,13 @@
 package allocator;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import java.io.IOException;
 
 import message.AllocationMessage;
-import message.Message;
 import message.NotificationMessage;
 import messagequeue.IMessageQueueHelper;
+import messagequeue.MessageQueueHelper;
 import model.TimeSlot;
-
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
+import util.Config;
 
 import com.mongodb.DB;
 import com.rabbitmq.client.ConsumerCancelledException;
@@ -24,45 +19,50 @@ public class Worker implements Runnable {
 	private IMessageQueueHelper queueUI, queueMessenger;
 	SlotAllocator slotAllocator;
 
-	public Worker(String queueHost, DB db) throws IOException {
-		/*
-		 * queueMessenger = new MessageQueueHelper(queueHost,
-		 * Config.ALLOCATOR_MESSENGER); queueUI = new MessageQueueHelper(queueHost,
-		 * Config.UI_ALLOCATOR);
-		 */
+	public Worker(DB db) throws IOException {
+		
+		queueMessenger = new MessageQueueHelper(Config.MQ_HOST, Config.MQ_PORT, Config.MQ_USER, Config.MQ_PASS, Config.MQ_NAME_ALLOCATOR_MESSENGER); 
+		queueUI = new MessageQueueHelper(Config.MQ_HOST, Config.MQ_PORT, Config.MQ_USER, Config.MQ_PASS, Config.MQ_NAME_UI_ALLOCATOR);
+		 
 		slotAllocator = new SlotAllocator(db);
+		AllocationMessage msg = new AllocationMessage();
+		msg.setDoctorId(1);
+		msg.setPatientId(1);
+		msg.setOperationTypeId(1);
+		msg.setMaxDistance(150);
+		msg.setLengthInMin(60);
+		queueUI.publish(msg);
 
-		queueMessenger = mock(IMessageQueueHelper.class);
-		queueUI = mock(IMessageQueueHelper.class);
-
-		try {
-			when(queueUI.consume()).thenAnswer(new Answer<Message>() {
-				@Override
-				public Message answer(InvocationOnMock invocation)
-						throws Throwable {
-					Thread.sleep(5000);
-					AllocationMessage msg = new AllocationMessage();
-					msg.setDoctorId(1);
-					msg.setPatientId(1);
-					msg.setOperationTypeId(1);
-					msg.setMaxDistance(100);
-
-					return msg;
-				}
-			});
-		} catch (ShutdownSignalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ConsumerCancelledException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		queueMessenger = mock(IMessageQueueHelper.class);
+//		queueUI = mock(IMessageQueueHelper.class);
+//
+//		try {
+//			when(queueUI.consume()).thenAnswer(new Answer<Message>() {
+//				@Override
+//				public Message answer(InvocationOnMock invocation)
+//						throws Throwable {
+//					Thread.sleep(5000);
+//					AllocationMessage msg = new AllocationMessage();
+//					msg.setDoctorId(1);
+//					msg.setPatientId(1);
+//					msg.setOperationTypeId(1);
+//					msg.setMaxDistance(100);
+//
+//					return msg;
+//				}
+//			});
+//		} catch (ShutdownSignalException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ConsumerCancelledException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
-	@Override
 	public void run() {
 		while (true) {
 			AllocationMessage msg;
@@ -84,7 +84,7 @@ public class Worker implements Runnable {
 			}
 
 			TimeSlot nearest = slotAllocator.getNearestSlot(msg.getPatientId(),
-					msg.getOperationTypeId(), msg.getMaxDistance());
+					msg.getOperationTypeId(), msg.getMaxDistance(), msg.getLengthInMin());
 
 			NotificationMessage nMsg = new NotificationMessage();
 			nMsg.setDoctorId(msg.getDoctorId());
@@ -102,10 +102,12 @@ public class Worker implements Runnable {
 			try {
 				queueMessenger.publish(nMsg);
 				System.out.println("published: doc:" + nMsg.getDoctorId() + " pat: " + nMsg.getPatientId() + " ts: " + nMsg.getTimeSlotId() + " succ: " + nMsg.isSuccessful());
+				if(!queueUI.ackLastMessage()) {
+					System.out.println("sending ack failed");
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			continue;
 		}
 	}
 

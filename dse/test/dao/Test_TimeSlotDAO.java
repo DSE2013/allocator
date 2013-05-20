@@ -14,24 +14,23 @@ import util.Config;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+import com.mongodb.DBAddress;
 import com.mongodb.Mongo;
 
 import db.DAOFactory;
 import db.TimeSlotDAO;
 
-public class TestTimeSlotDAO {
+public class Test_TimeSlotDAO {
 	private static DAOFactory fact;
 	private static DB db;
 	@BeforeClass
 	public static void setUp() {
-		Mongo mongo;
 		try {
-			mongo = new Mongo(Config.DB_HOST);
+			db = Mongo.connect(new DBAddress(Config.DB_HOST));
 		} catch (UnknownHostException e1) {
-			System.out.println("conn failed");
+			e1.printStackTrace();
 			return;
 		}
-		db = mongo.getDB(Config.DB_NAME);
 		fact = new DAOFactory(db);
 		db.getCollection(Config.DB_COLLECTION_SLOT).remove(new BasicDBObject());
 	}

@@ -6,18 +6,18 @@ import java.net.UnknownHostException;
 import util.Config;
 
 import com.mongodb.DB;
+import com.mongodb.DBAddress;
 import com.mongodb.Mongo;
 
 public class Allocator {
 	public static void main(String []args) {
-		Mongo mongo;
+		DB db;
 		try {
-			mongo = new Mongo(Config.DB_HOST);
+			db = Mongo.connect(new DBAddress(Config.DB_HOST));
 		} catch (UnknownHostException e1) {
-			System.out.println("conn failed");
+			e1.printStackTrace();
 			return;
 		}
-		DB db = mongo.getDB(Config.DB_NAME);
 
 		Thread t = null;
 		
@@ -25,7 +25,7 @@ public class Allocator {
 		while(true) {
 			if(t == null || !t.isAlive()) {
 				try {
-					t = new Thread(new Worker(Config.MQ_HOST, db));
+					t = new Thread(new Worker(db));
 				} catch (IOException e) {
 					e.printStackTrace();
 					break;

@@ -16,6 +16,7 @@ import org.junit.Test;
 import util.Config;
 
 import com.mongodb.DB;
+import com.mongodb.DBAddress;
 import com.mongodb.Mongo;
 
 import db.DAOFactory;
@@ -25,24 +26,21 @@ import db.OperationTypeDAO;
 import db.PatientDAO;
 import db.TimeSlotDAO;
 
-public class InsertTestData {
-	private static DAOFactory fact;
+public class Test_InsertTestData {
+	protected static DAOFactory fact;
+	protected static DB db;
 	
 	@BeforeClass
-	public static void init() {
-		Mongo mongo;
+	public static void setUp() throws ParseException {
 		try {
-			mongo = new Mongo(Config.DB_HOST);
+			db = Mongo.connect(new DBAddress(Config.DB_HOST));
 		} catch (UnknownHostException e1) {
-			System.out.println("conn failed");
+			e1.printStackTrace();
 			return;
 		}
-		DB db = mongo.getDB(Config.DB_NAME);
 		fact = new DAOFactory(db);
-	}
-	
-	@Test
-	public void insert() throws ParseException {
+		db.dropDatabase();
+		
 		PatientDAO pDao = fact.getPatientDAO();
 		Patient p1 = new Patient();
 		p1.setEmail("asdf");
@@ -61,6 +59,15 @@ public class InsertTestData {
 		p2.setPassword("pw1".getBytes());
 		p2.setSsn("1233");
 		pDao.persist(p2);
+		
+		Patient p3 = new Patient();
+		p3.setEmail("asdf2");
+		p3.setLatitude(48.2222);
+		p3.setLongitude(16.38231);
+		p3.setName("Markus Moser");
+		p3.setPassword("pw2".getBytes());
+		p3.setSsn("1235");
+		pDao.persist(p3);
 		
 		DoctorDAO dDao = fact.getDoctorDAO();
 		Doctor d = new Doctor();
@@ -141,7 +148,7 @@ public class InsertTestData {
 		ts.setHospitalId(h1.getId());
 		ts.setOperationTypeId(o.getId());
 		ts.setStart(sdf.parse("30.06.2013 09:00"));
-		ts.setEnd(sdf.parse("30.06.2013 10:00"));
+		ts.setEnd(sdf.parse("30.06.2013 11:00"));
 		tsDao.persist(ts);
 		
 		TimeSlot ts1 = new TimeSlot();
@@ -164,5 +171,17 @@ public class InsertTestData {
 		ts3.setStart(sdf.parse("29.06.2013 13:00"));
 		ts3.setEnd(sdf.parse("29.06.2013 17:00"));
 		tsDao.persist(ts3);
+		
+		TimeSlot ts4 = new TimeSlot();
+		ts4.setHospitalId(h.getId());
+		ts4.setOperationTypeId(o.getId());
+		ts4.setStart(sdf.parse("30.06.2013 09:00"));
+		ts4.setEnd(sdf.parse("30.06.2013 10:00"));
+		tsDao.persist(ts4);
+	}
+	
+	@Test
+	public void test() {
+		
 	}
 }

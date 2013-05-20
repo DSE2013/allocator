@@ -20,11 +20,15 @@ public class MessageQueueHelper implements IMessageQueueHelper {
 	private final String queueName;
 	private final Channel channel;
 	private QueueingConsumer consumer;
+	private Long lastDeliveryTag;
 	
-	public MessageQueueHelper(String host, String queueName) throws IOException {
+	public MessageQueueHelper(String host, int port, String username, String password, String queueName) throws IOException {
 		this.queueName = queueName;
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost(host);
+		factory.setPort(port);
+		factory.setUsername(username);
+		factory.setPassword(password);
 		Connection connection = factory.newConnection();
 		channel = connection.createChannel();
 		channel.queueDeclare(queueName, true, false, false, null);
@@ -38,9 +42,12 @@ public class MessageQueueHelper implements IMessageQueueHelper {
 	}
 	
 	public Message consume() throws ShutdownSignalException, ConsumerCancelledException, InterruptedException, IOException {
-		if(consumer == null)
+		if(consumer == null) {
 			consumer = new QueueingConsumer(channel);
+			channel.basicConsume(queueName, false, consumer);
+		}
 		QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+		lastDeliveryTag = delivery.getEnvelope().getDeliveryTag();
 		ByteArrayInputStream bis = new ByteArrayInputStream(delivery.getBody());
 		ObjectInputStream ois = new ObjectInputStream(bis);
 		try {
@@ -48,5 +55,17 @@ public class MessageQueueHelper implements IMessageQueueHelper {
 		} catch(ClassNotFoundException cnfe) {
 			return null;
 		}
+	}
+	
+	public boolean ackLastMessage() {
+		if(lastDeliveryTag != null) {
+			try {
+				channel.basicAck(lastDeliveryTag, false);
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
 	}
 }
