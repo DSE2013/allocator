@@ -1,4 +1,4 @@
-package dao;
+package at.ac.tuwien.dse.core.dao;
 
 import static org.junit.Assert.assertEquals;
 

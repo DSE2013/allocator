@@ -36,4 +36,8 @@ public class DAOFactory {
 	public NotificationDAO getNotificationDAO() {
 		return new NotificationDAO(db);
 	}
+	
+	public HospitalEmployeeDAO getHospitalEmployeeDAO() {
+		return new HospitalEmployeeDAO(db);
+	}
 }

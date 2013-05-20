@@ -1,4 +1,4 @@
-package dao;
+package at.ac.tuwien.dse.allocator.controller;
 
 import java.net.UnknownHostException;
 import java.text.ParseException;

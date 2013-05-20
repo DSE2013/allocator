@@ -24,4 +24,5 @@ public abstract class Config {
 	public static final String DB_COLLECTION_USER = "user";
 	public static final String DB_COLLECTION_DOCTOR = "doctor";
 	public static final String DB_COLLECTION_NOTIFICATION = "notification";
+	public static final String DB_COLLECTION_HOSPITAL_EMPLOYEE = "hospitalemployee";
 }

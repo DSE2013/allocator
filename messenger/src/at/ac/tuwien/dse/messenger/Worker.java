@@ -42,9 +42,8 @@ public class Worker implements Runnable {
 				break;
 			}
 			
-			
-			
-			queueAllocator.ackLastMessage();
+			if(notMan.notifyUsers(msg))
+				queueAllocator.ackLastMessage();
 		}
 	}
 

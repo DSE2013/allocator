@@ -1,14 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
-  <groupId>at.ac.tuwien.dse</groupId>
-  <artifactId>allocator</artifactId>
-  <version>1.0</version>
+  <parent>
+    <groupId>at.ac.tuwien.dse</groupId>
+    <artifactId>DSE_2013</artifactId>
+    <version>1.0</version>
+  </parent>
   
-   <packaging>jar</packaging>
+  <packaging>jar</packaging>
 
   <name>DSE_SS13_Allocator</name>
+  <artifactId>allocator</artifactId>
 
   <repositories>
 	<repository>
@@ -106,7 +108,7 @@
 	<dependency>
 		<groupId>at.ac.tuwien.dse</groupId>
 		<artifactId>core</artifactId>
-		<version>${project.version}</version>
+		<version>1.0</version>
 	</dependency>
   </dependencies>
 </project>

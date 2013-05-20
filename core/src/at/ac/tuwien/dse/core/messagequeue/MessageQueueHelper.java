@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-
 import at.ac.tuwien.dse.core.message.Message;
+import at.ac.tuwien.dse.core.message.NotificationMessage;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -52,8 +52,10 @@ public class MessageQueueHelper implements IMessageQueueHelper {
 		ByteArrayInputStream bis = new ByteArrayInputStream(delivery.getBody());
 		ObjectInputStream ois = new ObjectInputStream(bis);
 		try {
+			new NotificationMessage();
 			return (Message)ois.readObject();
 		} catch(ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
 			return null;
 		}
 	}

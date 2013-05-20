@@ -9,7 +9,6 @@ import at.ac.tuwien.dse.core.db.HospitalDAO;
 import at.ac.tuwien.dse.core.model.Hospital;
 import at.ac.tuwien.dse.core.model.TimeSlot;
 
-import dao.Test_InsertTestData;
 
 public class Test_SlotAllocator extends Test_InsertTestData {
 	SlotAllocator sa;

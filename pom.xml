@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>at.ac.tuwien.dse</groupId>
-  <artifactId>Allocator</artifactId>
+  <artifactId>DSE_2013</artifactId>
   <version>1.0</version>
 
   <name>DSE_SS13</name>
@@ -54,6 +54,34 @@
 					<version>2.5.1</version>
 				</plugin>
         </plugins>
+		
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.6</version>
+					<executions>
+						<execution>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>unpack</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.12</version>
+					<configuration>
+						<runOrder>alphabetical</runOrder>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
         <testSourceDirectory>${project.basedir}/test</testSourceDirectory>
     </build>
   
