@@ -26,16 +26,15 @@ public class Messenger {
 			if(t == null || !t.isAlive()) {
 				try {
 					t = new Thread(new Worker(db));
+					t.start();
 				} catch (IOException e) {
-					e.printStackTrace();
-					break;
+					System.out.println("thread creation failed: " + e.getMessage());
+					System.out.println("retry");
 				}
-				t.start();
 			}
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				break;
 			}
 		}
 	}

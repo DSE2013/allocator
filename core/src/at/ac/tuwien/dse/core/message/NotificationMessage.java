@@ -5,6 +5,7 @@ public class NotificationMessage extends Message {
 	
 	private boolean successful;
 	private int timeSlotId;
+	private boolean delete;
 
 	public boolean isSuccessful() {
 		return successful;
@@ -20,5 +21,13 @@ public class NotificationMessage extends Message {
 
 	public void setTimeSlotId(int timeSlotId) {
 		this.timeSlotId = timeSlotId;
+	}
+	
+	public boolean isDelete() {
+		return delete;
+	}
+
+	public void setDelete(boolean delete) {
+		this.delete = delete;
 	}
 }

@@ -3,7 +3,6 @@ package at.ac.tuwien.dse.allocator;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-
 import at.ac.tuwien.dse.core.util.Config;
 
 import com.mongodb.DB;
@@ -27,16 +26,15 @@ public class Allocator {
 			if(t == null || !t.isAlive()) {
 				try {
 					t = new Thread(new Worker(db));
+					t.start();
 				} catch (IOException e) {
-					e.printStackTrace();
-					break;
+					System.out.println("thread creation failed: " + e.getMessage());
+					System.out.println("retry");
 				}
-				t.start();
 			}
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				break;
 			}
 		}
 	}

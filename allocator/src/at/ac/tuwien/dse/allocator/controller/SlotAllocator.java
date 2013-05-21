@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
 import at.ac.tuwien.dse.core.db.DAOFactory;
 import at.ac.tuwien.dse.core.db.OperationDAO;
 import at.ac.tuwien.dse.core.db.PatientDAO;
@@ -97,5 +96,17 @@ public class SlotAllocator {
 		tsDao.update(slot);
 		return true;
 	}
-
+	
+	public boolean deleteReservation(int i) {
+		TimeSlot ts = tsDao.findById(i);
+		if(ts == null)
+			return false;
+		Operation o = oDao.findById(ts.getOperationId());
+		if(o == null)
+			return false;
+		oDao.delete(o.getId());
+		ts.setOperationId(null);
+		tsDao.update(ts);
+		return true;
+	}
 }

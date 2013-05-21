@@ -8,6 +8,7 @@ public class Notification {
 	private Boolean displayed;
 	private Date createdAt;
 	private Date updatedAt;
+	private Integer userId;
 	
 	public Integer getId() {
 		return id;
@@ -44,5 +45,11 @@ public class Notification {
 	}
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 }

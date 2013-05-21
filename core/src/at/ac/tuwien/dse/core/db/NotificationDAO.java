@@ -27,6 +27,7 @@ public class NotificationDAO extends BasicDAO {
 			n.setDisplayed((Boolean) obj.get("displayed"));
 			n.setCreatedAt((Date) obj.get("createdAt"));
 			n.setUpdatedAt((Date) obj.get("updatedAt"));
+			n.setUserId((Integer) obj.get("userId"));
 			return n;
 		}
 		return null;
@@ -38,7 +39,8 @@ public class NotificationDAO extends BasicDAO {
 				.append("message", n.getMessage())
 				.append("displayed", n.getDisplayed())
 				.append("createdAt", n.getCreatedAt())
-				.append("updatedAt", n.getUpdatedAt());
+				.append("updatedAt", n.getUpdatedAt())
+				.append("userId", n.getUserId());
 		n.setId(obj.getInt("id"));
 		collection.insert(obj);
 	}
@@ -50,7 +52,8 @@ public class NotificationDAO extends BasicDAO {
 				.append("message", n.getMessage())
 				.append("displayed", n.getDisplayed())
 				.append("createdAt", n.getCreatedAt())
-				.append("updatedAt", n.getUpdatedAt());
+				.append("updatedAt", n.getUpdatedAt())
+				.append("userId", n.getUserId());
 		collection.findAndModify(example, update);
 	}
 }

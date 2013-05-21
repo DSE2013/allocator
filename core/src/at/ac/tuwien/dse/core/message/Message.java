@@ -7,7 +7,7 @@ public abstract class Message implements Serializable{
 	
 	private int doctorId;
 	private int patientId;
-	private boolean delete;
+	
 	
 	public int getDoctorId() {
 		return doctorId;
@@ -23,13 +23,5 @@ public abstract class Message implements Serializable{
 
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
-	}
-
-	public boolean isDelete() {
-		return delete;
-	}
-
-	public void setDelete(boolean delete) {
-		this.delete = delete;
 	}
 }

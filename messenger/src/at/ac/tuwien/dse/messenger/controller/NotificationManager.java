@@ -46,7 +46,7 @@ public class NotificationManager {
 		Doctor d = docDAO.findById(msg.getDoctorId());
 		Patient p = patDAO.findById(msg.getPatientId());
 		TimeSlot ts = tsDAO.findById(msg.getTimeSlotId());
-		String operationTypeName = "", hospitalName = "";
+		String operationTypeName = "", hospitalName = "", doctorName = "", patientName = "";
 		Date start = new Date(), end = new Date();
 		Hospital h = null;
 		if(ts != null) {
@@ -57,7 +57,11 @@ public class NotificationManager {
 			start = ts.getStart();
 			end = ts.getEnd();
 		}
-		NotificationStrings ns = new NotificationStrings(d.getName(), p.getName(), hospitalName, operationTypeName, start, end);
+		if(d != null)
+			doctorName = d.getName();
+		if(p != null)
+			patientName = p.getName();
+		NotificationStrings ns = new NotificationStrings(doctorName, patientName, hospitalName, operationTypeName, start, end);
 		if(msg.isSuccessful()) {
 			// successfull reservation deletion
 			if(msg.isDelete()) {
@@ -89,6 +93,7 @@ public class NotificationManager {
 		not.setMessage(message);
 		not.setTitle(title);
 		not.setUpdatedAt(null);
+		not.setUserId(userId);
 		notDAO.persist(not);
 		return true;
 	}

@@ -1,18 +1,20 @@
 package at.ac.tuwien.dse.allocator.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import at.ac.tuwien.dse.allocator.controller.SlotAllocator;
 import at.ac.tuwien.dse.core.db.HospitalDAO;
 import at.ac.tuwien.dse.core.model.Hospital;
 import at.ac.tuwien.dse.core.model.TimeSlot;
 
 
 public class Test_SlotAllocator extends Test_InsertTestData {
-	SlotAllocator sa;
-	
+	private static SlotAllocator sa;
+
 	@Test
 	public void testGetNearestSlot() {
 		sa = new SlotAllocator(db);
@@ -36,7 +38,7 @@ public class Test_SlotAllocator extends Test_InsertTestData {
 	}
 	
 	@Test
-	public void testGetNearestSlot_earliest() {
-		
+	public void testGetNearestSlot_isEarliest() {
+		sa = new SlotAllocator(db);
 	}
 }

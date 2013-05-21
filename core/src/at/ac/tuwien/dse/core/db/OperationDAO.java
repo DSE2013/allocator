@@ -46,4 +46,9 @@ public class OperationDAO extends BasicDAO {
 		collection.findAndModify(example, update);
 		collection.ensureIndex("id");
 	}
+	
+	public void delete(int id) {
+		BasicDBObject example = new BasicDBObject("id", id);
+		collection.remove(example);
+	}
 }

@@ -26,14 +26,14 @@ public class NotificationStrings {
 	private String deletedMsgHospital = "/doctor/ deleted a /operationtype/ surgery slot reservation at /start/ - /end/ for patient /patient/";
 	
 	public NotificationStrings(String doctor, String patient, String hospital, String operationType, Date start, Date end) {
-		SimpleDateFormat sdf = new SimpleDateFormat("y-M-d HH:mm:ss");
-		successMsgDoctor.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
-		successMsgPatient.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
-		successMsgHospital.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
-		deletedMsgDoctor.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
-		deletedMsgPatient.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
-		deletedMsgHospital.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
-		failedMsgDoctor.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		successMsgDoctor = successMsgDoctor.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
+		successMsgPatient = successMsgPatient.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
+		successMsgHospital = successMsgHospital.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
+		deletedMsgDoctor = deletedMsgDoctor.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
+		deletedMsgPatient = deletedMsgPatient.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
+		deletedMsgHospital = deletedMsgHospital.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
+		failedMsgDoctor = failedMsgDoctor.replaceAll("/doctor/", doctor).replaceAll("/patient/", patient).replaceAll("/hospital/", hospital).replaceAll("/operationtype/", operationType).replaceAll("/start/", sdf.format(start)).replaceAll("/end/", sdf.format(end));
 	}
 
 	public String getSuccessTitleDoctor() {

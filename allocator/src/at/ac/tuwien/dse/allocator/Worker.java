@@ -2,9 +2,10 @@ package at.ac.tuwien.dse.allocator;
 
 import java.io.IOException;
 
-
 import at.ac.tuwien.dse.allocator.controller.SlotAllocator;
 import at.ac.tuwien.dse.core.message.AllocationMessage;
+import at.ac.tuwien.dse.core.message.DeletionMessage;
+import at.ac.tuwien.dse.core.message.Message;
 import at.ac.tuwien.dse.core.message.NotificationMessage;
 import at.ac.tuwien.dse.core.messagequeue.IMessageQueueHelper;
 import at.ac.tuwien.dse.core.messagequeue.MessageQueueHelper;
@@ -26,13 +27,21 @@ public class Worker implements Runnable {
 		queueUI = new MessageQueueHelper(Config.MQ_HOST, Config.MQ_PORT, Config.MQ_USER, Config.MQ_PASS, Config.MQ_NAME_UI_ALLOCATOR);
 		 
 		slotAllocator = new SlotAllocator(db);
-		AllocationMessage msg = new AllocationMessage();
-		msg.setDoctorId(1);
+		/*AllocationMessage msg = new AllocationMessage();
+		msg.setDoctorId(7);
 		msg.setPatientId(1);
 		msg.setOperationTypeId(1);
 		msg.setMaxDistance(150);
 		msg.setLengthInMin(60);
+		
 		queueUI.publish(msg);
+		
+		DeletionMessage dMsg = new DeletionMessage();
+		dMsg.setTimeSlotId(2);
+		dMsg.setDoctorId(7);
+		dMsg.setPatientId(1);
+		
+		queueUI.publish(dMsg);*/
 
 //		queueMessenger = mock(IMessageQueueHelper.class);
 //		queueUI = mock(IMessageQueueHelper.class);
@@ -66,9 +75,9 @@ public class Worker implements Runnable {
 
 	public void run() {
 		while (true) {
-			AllocationMessage msg;
+			Message msg;
 			try {
-				msg = (AllocationMessage) queueUI.consume();
+				msg = queueUI.consume();
 				// TODO: handle catch clauses
 			} catch (ShutdownSignalException e) {
 				e.printStackTrace();
@@ -83,23 +92,38 @@ public class Worker implements Runnable {
 				e.printStackTrace();
 				break;
 			}
-
-			TimeSlot nearest = slotAllocator.getNearestSlot(msg.getPatientId(),
-					msg.getOperationTypeId(), msg.getMaxDistance(), msg.getLengthInMin());
-
+			
 			NotificationMessage nMsg = new NotificationMessage();
 			nMsg.setDoctorId(msg.getDoctorId());
 			nMsg.setPatientId(msg.getPatientId());
-			if (nearest == null) {
-				nMsg.setSuccessful(false);
-			} else {
-				nMsg.setTimeSlotId(nearest.getId());
-				if (slotAllocator.reserveSlot(nearest, msg.getPatientId(), msg.getDoctorId())) {
+			
+			if(msg.getClass().equals(AllocationMessage.class)) {
+				AllocationMessage aMsg = (AllocationMessage)msg;
+				TimeSlot nearest = slotAllocator.getNearestSlot(msg.getPatientId(),
+						aMsg.getOperationTypeId(), aMsg.getMaxDistance(), aMsg.getLengthInMin());
+	
+				nMsg.setDelete(false);
+				if (nearest == null) {
+					nMsg.setSuccessful(false);
+				} else {
+					nMsg.setTimeSlotId(nearest.getId());
+					if (slotAllocator.reserveSlot(nearest, msg.getPatientId(), msg.getDoctorId())) {
+						nMsg.setSuccessful(true);
+					} else {
+						nMsg.setSuccessful(false);
+					}
+				}
+			} else if(msg.getClass().equals(DeletionMessage.class)) {
+				DeletionMessage dMsg = (DeletionMessage)msg;
+				nMsg.setDelete(true);
+				nMsg.setTimeSlotId(dMsg.getTimeSlotId());
+				if(slotAllocator.deleteReservation(dMsg.getTimeSlotId())) {
 					nMsg.setSuccessful(true);
 				} else {
 					nMsg.setSuccessful(false);
 				}
 			}
+			
 			try {
 				queueMessenger.publish(nMsg);
 				System.out.println("published: doc:" + nMsg.getDoctorId() + " pat: " + nMsg.getPatientId() + " ts: " + nMsg.getTimeSlotId() + " succ: " + nMsg.isSuccessful());
