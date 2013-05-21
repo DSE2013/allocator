@@ -13,6 +13,8 @@ import at.ac.tuwien.dse.core.model.TimeSlot;
 import at.ac.tuwien.dse.core.util.Config;
 
 import com.mongodb.DB;
+import com.mongodb.DBAddress;
+import com.mongodb.Mongo;
 import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.ShutdownSignalException;
 
@@ -21,8 +23,8 @@ public class Worker implements Runnable {
 	private IMessageQueueHelper queueUI, queueMessenger;
 	SlotAllocator slotAllocator;
 
-	public Worker(DB db) throws IOException {
-		
+	public Worker() throws IOException {
+		DB db = Mongo.connect(new DBAddress(Config.DB_HOST));
 		queueMessenger = new MessageQueueHelper(Config.MQ_HOST, Config.MQ_PORT, Config.MQ_USER, Config.MQ_PASS, Config.MQ_NAME_ALLOCATOR_MESSENGER); 
 		queueUI = new MessageQueueHelper(Config.MQ_HOST, Config.MQ_PORT, Config.MQ_USER, Config.MQ_PASS, Config.MQ_NAME_UI_ALLOCATOR);
 		 

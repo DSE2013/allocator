@@ -3,6 +3,7 @@ package at.ac.tuwien.dse.messenger.controller;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -38,10 +39,10 @@ public class MailSender {
 	        msg.saveChanges();
 	        Transport.send(msg);
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		}
         return true;

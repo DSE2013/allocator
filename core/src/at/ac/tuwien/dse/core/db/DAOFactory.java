@@ -40,4 +40,8 @@ public class DAOFactory {
 	public HospitalEmployeeDAO getHospitalEmployeeDAO() {
 		return new HospitalEmployeeDAO(db);
 	}
+
+	public UserDAO getUserDAO() {
+		return new UserDAO(db);
+	}
 }

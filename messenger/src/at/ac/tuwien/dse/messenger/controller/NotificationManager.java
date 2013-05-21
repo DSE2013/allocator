@@ -10,6 +10,7 @@ import at.ac.tuwien.dse.core.db.NotificationDAO;
 import at.ac.tuwien.dse.core.db.OperationTypeDAO;
 import at.ac.tuwien.dse.core.db.PatientDAO;
 import at.ac.tuwien.dse.core.db.TimeSlotDAO;
+import at.ac.tuwien.dse.core.db.UserDAO;
 import at.ac.tuwien.dse.core.message.NotificationMessage;
 import at.ac.tuwien.dse.core.model.Doctor;
 import at.ac.tuwien.dse.core.model.Hospital;
@@ -18,6 +19,7 @@ import at.ac.tuwien.dse.core.model.Notification;
 import at.ac.tuwien.dse.core.model.OperationType;
 import at.ac.tuwien.dse.core.model.Patient;
 import at.ac.tuwien.dse.core.model.TimeSlot;
+import at.ac.tuwien.dse.core.model.User;
 import at.ac.tuwien.dse.messenger.util.Config;
 import at.ac.tuwien.dse.messenger.util.NotificationStrings;
 
@@ -31,7 +33,9 @@ public class NotificationManager {
 	private OperationTypeDAO otDAO;
 	private NotificationDAO notDAO;
 	private HospitalEmployeeDAO heDAO;
+	private UserDAO uDAO;
 	private MailSender mailSender;
+	
 	
 	public NotificationManager(DB db) {
 		DAOFactory fact = new DAOFactory(db);
@@ -42,6 +46,7 @@ public class NotificationManager {
 		otDAO = fact.getOperationTypeDAO();
 		notDAO = fact.getNotificationDAO();
 		heDAO = fact.getHospitalEmployeeDAO();
+		uDAO = fact.getUserDAO();
 		mailSender = new MailSender(Config.SMTP_HOST, Config.SMTP_USER, Config.SMTP_PASS, Config.MAIL_ADDRESS, Config.MAIL_NAME);
 	}
 	
@@ -70,7 +75,6 @@ public class NotificationManager {
 			if(msg.isDelete()) {
 				// notify doctor
 				notifyUser(d.getId(), ns.getDeletedTitleDoctor(), ns.getDeletedMsgDoctor());
-				mailSender.sendMail(d.getEmail(), d.getName(), ns.getDeletedTitleDoctor(), ns.getDeletedMsgDoctor());
 				// notify patient
 				notifyUser(p.getId(), ns.getDeletedTitlePatient(), ns.getDeletedMsgPatient());
 				// notify hospital employees
@@ -91,6 +95,11 @@ public class NotificationManager {
 	}
 	
 	private boolean notifyUser(Integer userId, String title, String message) {
+		User u = new Patient();
+		u.setId(userId);
+		u = uDAO.findById(u);
+		if(u != null)
+			mailSender.sendMail(u.getEmail(), u.getName(), title, message);
 		Notification not = new Notification();
 		not.setCreatedAt(new Date());
 		not.setDisplayed(false);
