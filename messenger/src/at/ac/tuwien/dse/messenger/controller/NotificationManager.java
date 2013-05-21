@@ -18,6 +18,7 @@ import at.ac.tuwien.dse.core.model.Notification;
 import at.ac.tuwien.dse.core.model.OperationType;
 import at.ac.tuwien.dse.core.model.Patient;
 import at.ac.tuwien.dse.core.model.TimeSlot;
+import at.ac.tuwien.dse.messenger.util.Config;
 import at.ac.tuwien.dse.messenger.util.NotificationStrings;
 
 import com.mongodb.DB;
@@ -30,6 +31,7 @@ public class NotificationManager {
 	private OperationTypeDAO otDAO;
 	private NotificationDAO notDAO;
 	private HospitalEmployeeDAO heDAO;
+	private MailSender mailSender;
 	
 	public NotificationManager(DB db) {
 		DAOFactory fact = new DAOFactory(db);
@@ -40,6 +42,7 @@ public class NotificationManager {
 		otDAO = fact.getOperationTypeDAO();
 		notDAO = fact.getNotificationDAO();
 		heDAO = fact.getHospitalEmployeeDAO();
+		mailSender = new MailSender(Config.SMTP_HOST, Config.SMTP_USER, Config.SMTP_PASS, Config.MAIL_ADDRESS, Config.MAIL_NAME);
 	}
 	
 	public boolean notifyUsers(NotificationMessage msg) {
@@ -63,10 +66,11 @@ public class NotificationManager {
 			patientName = p.getName();
 		NotificationStrings ns = new NotificationStrings(doctorName, patientName, hospitalName, operationTypeName, start, end);
 		if(msg.isSuccessful()) {
-			// successfull reservation deletion
+			// successful reservation deletion
 			if(msg.isDelete()) {
 				// notify doctor
 				notifyUser(d.getId(), ns.getDeletedTitleDoctor(), ns.getDeletedMsgDoctor());
+				mailSender.sendMail(d.getEmail(), d.getName(), ns.getDeletedTitleDoctor(), ns.getDeletedMsgDoctor());
 				// notify patient
 				notifyUser(p.getId(), ns.getDeletedTitlePatient(), ns.getDeletedMsgPatient());
 				// notify hospital employees

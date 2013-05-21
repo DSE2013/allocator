@@ -101,7 +101,7 @@ public class Test_InsertTestData {
 		
 		DoctorDAO dDao = fact.getDoctorDAO();
 		Doctor d = new Doctor();
-		d.setEmail("qwer");
+		d.setEmail("dominik0012@gmx.net");
 		d.setName("Dr. Aufmesser");
 		d.setPassword(getPassword("dra"));
 		dDao.persist(d);

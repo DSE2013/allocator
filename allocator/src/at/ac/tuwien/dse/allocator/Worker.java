@@ -27,7 +27,7 @@ public class Worker implements Runnable {
 		queueUI = new MessageQueueHelper(Config.MQ_HOST, Config.MQ_PORT, Config.MQ_USER, Config.MQ_PASS, Config.MQ_NAME_UI_ALLOCATOR);
 		 
 		slotAllocator = new SlotAllocator(db);
-		/*AllocationMessage msg = new AllocationMessage();
+		AllocationMessage msg = new AllocationMessage();
 		msg.setDoctorId(7);
 		msg.setPatientId(1);
 		msg.setOperationTypeId(1);
@@ -41,7 +41,7 @@ public class Worker implements Runnable {
 		dMsg.setDoctorId(7);
 		dMsg.setPatientId(1);
 		
-		queueUI.publish(dMsg);*/
+		queueUI.publish(dMsg);
 
 //		queueMessenger = mock(IMessageQueueHelper.class);
 //		queueUI = mock(IMessageQueueHelper.class);
