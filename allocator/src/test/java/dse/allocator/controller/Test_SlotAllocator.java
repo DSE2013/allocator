@@ -31,7 +31,7 @@ public class Test_SlotAllocator extends Test_InsertTestData {
 		assertTrue((ts.getEnd().getTime() - ts.getStart().getTime())/1000/60 >= 90);
 		assertEquals((int)ts.getOperationTypeId(), 1);
 		h = hDao.findById(ts.getHospitalId());
-		assertEquals(h.getName(), "Barmherzige Brüder Wien");
+		assertEquals(h.getName(), "Barmherzige BrÃ¼der Wien");
 		
 		ts = sa.getNearestSlot(2, 0, 150d, 30);
 		assertNull(ts);
