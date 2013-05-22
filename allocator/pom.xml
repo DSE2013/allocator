@@ -56,7 +56,6 @@
         <version>2.5.1</version>
       </plugin>
     </plugins>
-    <testSourceDirectory>${project.basedir}/test</testSourceDirectory>
   </build>
 
   <reporting>
@@ -111,4 +110,23 @@
       <version>1.0</version>
     </dependency>
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>allocator</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>execution</id>
+                <phase>test</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
