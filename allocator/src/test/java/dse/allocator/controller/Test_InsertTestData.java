@@ -58,7 +58,7 @@ public class Test_InsertTestData {
 		p2.setEmail("asdf1");
 		p2.setLatitude(48.21524);
 		p2.setLongitude(16.34799);
-		p2.setName("Fr. Hermine Müller");
+		p2.setName("Fr. Hermine MÃ¼ller");
 		p2.setPassword(getPassword("pwhm"));
 		p2.setSsn("1233");
 		pDao.persist(p2);
@@ -85,7 +85,7 @@ public class Test_InsertTestData {
 		p5.setEmail("asdf4");
 		p5.setLatitude(48.2222);
 		p5.setLongitude(16.38231);
-		p5.setName("Hr. Ben Bäcker");
+		p5.setName("Hr. Ben BÃ¤cker");
 		p5.setPassword(getPassword("pwbb"));
 		p5.setSsn("1235");
 		pDao.persist(p5);
@@ -130,7 +130,7 @@ public class Test_InsertTestData {
 		oDao.persist(o);
 		
 		OperationType o1 = new OperationType();
-		o1.setName("Orthopädie");
+		o1.setName("OrthopÃ¤die");
 		oDao.persist(o1);
 		
 		OperationType o2 = new OperationType();
@@ -156,7 +156,7 @@ public class Test_InsertTestData {
 		Hospital h1 = new Hospital();
 		h1.setLatitude(48.21511);
 		h1.setLongitude(16.3804);
-		h1.setName("Barmherzige Brüder Wien");
+		h1.setName("Barmherzige BrÃ¼der Wien");
 		hDao.persist(h1);
 		
 		Hospital h2 = new Hospital();
