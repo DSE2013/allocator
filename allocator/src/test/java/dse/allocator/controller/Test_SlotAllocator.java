@@ -11,11 +11,10 @@ import java.text.SimpleDateFormat;
 import org.junit.Before;
 import org.junit.Test;
 
-import dse.core.dao.Test_AbstractTest;
 import dse.core.db.HospitalDAO;
 import dse.core.model.Hospital;
 import dse.core.model.TimeSlot;
-
+import dse.allocator.controller.Test_AbstractTest;
 
 public class Test_SlotAllocator extends Test_AbstractTest {
 	private static SlotAllocator sa;

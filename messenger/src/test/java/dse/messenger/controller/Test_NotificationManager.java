@@ -13,7 +13,6 @@ import com.mongodb.DB;
 import com.mongodb.DBAddress;
 import com.mongodb.Mongo;
 
-import dse.core.dao.Test_AbstractTest;
 import dse.core.db.DAOFactory;
 import dse.core.db.HospitalEmployeeDAO;
 import dse.core.db.NotificationDAO;

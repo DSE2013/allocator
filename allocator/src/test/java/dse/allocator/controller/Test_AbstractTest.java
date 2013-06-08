@@ -1,4 +1,4 @@
-package dse.core.dao;
+package dse.allocator.controller;
 
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
