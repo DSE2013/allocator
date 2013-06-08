@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.allocator.controller;
+package dse.allocator.controller;
 
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
@@ -9,27 +9,27 @@ import java.text.SimpleDateFormat;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import at.ac.tuwien.dse.core.db.DAOFactory;
-import at.ac.tuwien.dse.core.db.DoctorDAO;
-import at.ac.tuwien.dse.core.db.HospitalDAO;
-import at.ac.tuwien.dse.core.db.HospitalEmployeeDAO;
-import at.ac.tuwien.dse.core.db.OperationTypeDAO;
-import at.ac.tuwien.dse.core.db.PatientDAO;
-import at.ac.tuwien.dse.core.db.TimeSlotDAO;
-import at.ac.tuwien.dse.core.model.Doctor;
-import at.ac.tuwien.dse.core.model.Hospital;
-import at.ac.tuwien.dse.core.model.HospitalEmployee;
-import at.ac.tuwien.dse.core.model.OperationType;
-import at.ac.tuwien.dse.core.model.Patient;
-import at.ac.tuwien.dse.core.model.TimeSlot;
-import at.ac.tuwien.dse.core.util.Config;
+import dse.core.db.DAOFactory;
+import dse.core.db.DoctorDAO;
+import dse.core.db.HospitalDAO;
+import dse.core.db.HospitalEmployeeDAO;
+import dse.core.db.OperationTypeDAO;
+import dse.core.db.PatientDAO;
+import dse.core.db.TimeSlotDAO;
+import dse.core.model.Doctor;
+import dse.core.model.Hospital;
+import dse.core.model.HospitalEmployee;
+import dse.core.model.OperationType;
+import dse.core.model.Patient;
+import dse.core.model.TimeSlot;
+import dse.core.util.Config;
 
 import com.mongodb.DB;
 import com.mongodb.DBAddress;
 import com.mongodb.Mongo;
 
 
-public class Test_InsertTestData {
+public abstract class Test_AbstractTest {
 	protected static DAOFactory fact;
 	protected static DB db;
 	
@@ -72,10 +72,11 @@ public class Test_InsertTestData {
 		p3.setSsn("1235");
 		pDao.persist(p3);
 		
+		// Tulln
 		Patient p4 = new Patient();
 		p4.setEmail("asdf3");
-		p4.setLatitude(48.2222);
-		p4.setLongitude(16.38231);
+		p4.setLatitude(48.331585);
+		p4.setLongitude(16.060686);
 		p4.setName("Fr. Beatrix Bauer");
 		p4.setPassword(getPassword("pwbb"));
 		p4.setSsn("1235");
@@ -264,6 +265,20 @@ public class Test_InsertTestData {
 		ts4.setEnd(sdf.parse("30.06.2013 10:00"));
 		tsDao.persist(ts4);
 		
+		// time slots for LKH Tulln
+		TimeSlot ts5 = new TimeSlot();
+		ts5.setHospitalId(h5.getId());
+		ts5.setOperationTypeId(o.getId());
+		ts5.setStart(sdf.parse("30.06.2013 20:00"));
+		ts5.setEnd(sdf.parse("30.06.2013 22:00"));
+		tsDao.persist(ts5);
+		
+		TimeSlot ts6 = new TimeSlot();
+		ts6.setHospitalId(h5.getId());
+		ts6.setOperationTypeId(o.getId());
+		ts6.setStart(sdf.parse("30.06.2013 10:00"));
+		ts6.setEnd(sdf.parse("30.06.2013 10:30"));
+		tsDao.persist(ts6);
 	}
 	
 	@Test

@@ -44,4 +44,12 @@ public class DAOFactory {
 	public UserDAO getUserDAO() {
 		return new UserDAO(db);
 	}
+	
+	public NotificationMessageDAO getNotificationMessageDAO() {
+		return new NotificationMessageDAO(db);
+	}
+	
+	public AllocationMessageDAO getAllocationMessageDAO() {
+		return new AllocationMessageDAO(db);
+	}
 }

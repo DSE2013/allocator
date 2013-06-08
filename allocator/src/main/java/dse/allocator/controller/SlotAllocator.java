@@ -19,8 +19,6 @@ import dse.core.model.Patient;
 import dse.core.model.TimeSlot;
 import dse.core.util.Config;
 
-
-
 public class SlotAllocator {
 	private DAOFactory daoFact;
 	private PatientDAO pDao;
@@ -51,7 +49,7 @@ public class SlotAllocator {
 		BasicDBObject filter = new BasicDBObject("geoNear",
 				Config.DB_COLLECTION_HOSPITAL)
 				.append("near",
-						new double[] { p.getLatitude(), p.getLongitude() })
+						new double[] { p.getLongitude(), p.getLatitude() })
 				.append("spherical", true).append("distanceMultiplier", 6371)
 				.append("maxDistance", maxDistance / 6371);
 
@@ -68,7 +66,7 @@ public class SlotAllocator {
 			List<TimeSlot> tsList = tsDao.findByExample(example);
 			Collections.sort(tsList, new Comparator<TimeSlot>() {
 				public int compare(TimeSlot o1, TimeSlot o2) {
-					return (int) (o2.getStart().getTime() - o1.getStart().getTime());
+					return (int) (o1.getStart().getTime() - o2.getStart().getTime());
 				}
 			});
 			for (TimeSlot ts : tsList) {
@@ -76,7 +74,7 @@ public class SlotAllocator {
 				// -> return timeslot
 				long lengthInMinTs = (ts.getEnd().getTime()-ts.getStart().getTime())/1000/60;
 				if (ts.getOperationTypeId() == operationTypeId
-						&& ts.getOperationId() == null && lengthInMinTs > lengthInMin) {
+						&& ts.getOperationId() == null && lengthInMinTs >= lengthInMin) {
 					return ts;
 				}
 			}

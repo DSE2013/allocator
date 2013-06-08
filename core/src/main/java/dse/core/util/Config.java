@@ -25,4 +25,7 @@ public abstract class Config {
 	public static final String DB_COLLECTION_DOCTOR = "doctor";
 	public static final String DB_COLLECTION_NOTIFICATION = "notification";
 	public static final String DB_COLLECTION_HOSPITAL_EMPLOYEE = "hospitalemployee";
+	public static final String DB_COLLECTION_ALLOCATION_MESSAGE = "allocationmessage";
+	public static final String DB_COLLECTION_NOTIFICATION_MESSAGE = "notificationmessage";
+	public static final String DB_COLLECTION_DELETION_MESSAGE = "deletionmessage";
 }

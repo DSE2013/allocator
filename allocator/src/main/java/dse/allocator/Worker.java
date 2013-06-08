@@ -9,6 +9,8 @@ import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.ShutdownSignalException;
 
 import dse.allocator.controller.SlotAllocator;
+import dse.core.db.DAOFactory;
+import dse.core.db.NotificationMessageDAO;
 import dse.core.message.AllocationMessage;
 import dse.core.message.DeletionMessage;
 import dse.core.message.Message;
@@ -21,12 +23,16 @@ import dse.core.util.Config;
 
 public class Worker implements Runnable {
 	private IMessageQueueHelper queueUI, queueMessenger;
-	SlotAllocator slotAllocator;
+	private SlotAllocator slotAllocator;
+	private NotificationMessageDAO notificationMessageDAO;
 
 	public Worker() throws IOException {
 		DB db = Mongo.connect(new DBAddress(Config.DB_HOST));
 		queueMessenger = new MessageQueueHelper(Config.MQ_HOST, Config.MQ_PORT, Config.MQ_USER, Config.MQ_PASS, Config.MQ_NAME_ALLOCATOR_MESSENGER); 
 		queueUI = new MessageQueueHelper(Config.MQ_HOST, Config.MQ_PORT, Config.MQ_USER, Config.MQ_PASS, Config.MQ_NAME_UI_ALLOCATOR);
+		
+		DAOFactory fact = new DAOFactory(db);
+		notificationMessageDAO = fact.getNotificationMessageDAO();
 		 
 		slotAllocator = new SlotAllocator(db);
 		AllocationMessage msg = new AllocationMessage();
@@ -125,6 +131,8 @@ public class Worker implements Runnable {
 					nMsg.setSuccessful(false);
 				}
 			}
+			
+			notificationMessageDAO.persist(nMsg);
 			
 			try {
 				queueMessenger.publish(nMsg);
