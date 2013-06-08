@@ -1,22 +1,22 @@
-package at.ac.tuwien.dse.allocator;
+package dse.allocator;
 
 import java.io.IOException;
-
-import at.ac.tuwien.dse.allocator.controller.SlotAllocator;
-import at.ac.tuwien.dse.core.message.AllocationMessage;
-import at.ac.tuwien.dse.core.message.DeletionMessage;
-import at.ac.tuwien.dse.core.message.Message;
-import at.ac.tuwien.dse.core.message.NotificationMessage;
-import at.ac.tuwien.dse.core.messagequeue.IMessageQueueHelper;
-import at.ac.tuwien.dse.core.messagequeue.MessageQueueHelper;
-import at.ac.tuwien.dse.core.model.TimeSlot;
-import at.ac.tuwien.dse.core.util.Config;
 
 import com.mongodb.DB;
 import com.mongodb.DBAddress;
 import com.mongodb.Mongo;
 import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.ShutdownSignalException;
+
+import dse.allocator.controller.SlotAllocator;
+import dse.core.message.AllocationMessage;
+import dse.core.message.DeletionMessage;
+import dse.core.message.Message;
+import dse.core.message.NotificationMessage;
+import dse.core.messagequeue.IMessageQueueHelper;
+import dse.core.messagequeue.MessageQueueHelper;
+import dse.core.model.TimeSlot;
+import dse.core.util.Config;
 
 
 public class Worker implements Runnable {

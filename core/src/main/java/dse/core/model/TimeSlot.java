@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.core.model;
+package dse.core.model;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.messenger.util;
+package dse.messenger.util;
 
 public abstract class Config {
 	public static final String SMTP_HOST = "mail.gmx.net";

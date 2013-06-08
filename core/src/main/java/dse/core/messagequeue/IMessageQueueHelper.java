@@ -1,9 +1,9 @@
-package at.ac.tuwien.dse.core.messagequeue;
+package dse.core.messagequeue;
 
 import java.io.IOException;
 
 
-import at.ac.tuwien.dse.core.message.Message;
+import dse.core.message.Message;
 
 import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.ShutdownSignalException;

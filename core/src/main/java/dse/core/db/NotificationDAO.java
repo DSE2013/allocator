@@ -1,10 +1,10 @@
-package at.ac.tuwien.dse.core.db;
+package dse.core.db;
 
 import java.util.Date;
 
 
-import at.ac.tuwien.dse.core.model.Notification;
-import at.ac.tuwien.dse.core.util.Config;
+import dse.core.model.Notification;
+import dse.core.util.Config;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;

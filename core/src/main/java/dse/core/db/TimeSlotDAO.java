@@ -1,12 +1,12 @@
-package at.ac.tuwien.dse.core.db;
+package dse.core.db;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
-import at.ac.tuwien.dse.core.model.TimeSlot;
-import at.ac.tuwien.dse.core.util.Config;
+import dse.core.model.TimeSlot;
+import dse.core.util.Config;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;

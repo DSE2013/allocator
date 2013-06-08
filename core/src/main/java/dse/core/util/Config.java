@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.core.util;
+package dse.core.util;
 
 public abstract class Config {
 	// MQ

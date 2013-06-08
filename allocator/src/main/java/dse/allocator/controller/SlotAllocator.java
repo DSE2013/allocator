@@ -1,23 +1,23 @@
-package at.ac.tuwien.dse.allocator.controller;
+package dse.allocator.controller;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import at.ac.tuwien.dse.core.db.DAOFactory;
-import at.ac.tuwien.dse.core.db.OperationDAO;
-import at.ac.tuwien.dse.core.db.PatientDAO;
-import at.ac.tuwien.dse.core.db.TimeSlotDAO;
-import at.ac.tuwien.dse.core.model.Operation;
-import at.ac.tuwien.dse.core.model.Patient;
-import at.ac.tuwien.dse.core.model.TimeSlot;
-import at.ac.tuwien.dse.core.util.Config;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.CommandResult;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
+
+import dse.core.db.DAOFactory;
+import dse.core.db.OperationDAO;
+import dse.core.db.PatientDAO;
+import dse.core.db.TimeSlotDAO;
+import dse.core.model.Operation;
+import dse.core.model.Patient;
+import dse.core.model.TimeSlot;
+import dse.core.util.Config;
 
 
 

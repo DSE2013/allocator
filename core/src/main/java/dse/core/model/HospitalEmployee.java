@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.core.model;
+package dse.core.model;
 
 public class HospitalEmployee extends User {
 	private Integer hospitalId;

@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.messenger.controller;
+package dse.messenger.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;

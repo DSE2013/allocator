@@ -1,8 +1,8 @@
-package at.ac.tuwien.dse.core.db;
+package dse.core.db;
 
 
-import at.ac.tuwien.dse.core.model.User;
-import at.ac.tuwien.dse.core.util.Config;
+import dse.core.model.User;
+import dse.core.util.Config;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;

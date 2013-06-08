@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.core.message;
+package dse.core.message;
 
 import java.io.Serializable;
 

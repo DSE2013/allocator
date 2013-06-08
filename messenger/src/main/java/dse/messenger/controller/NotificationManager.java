@@ -1,27 +1,27 @@
-package at.ac.tuwien.dse.messenger.controller;
+package dse.messenger.controller;
 
 import java.util.Date;
 
-import at.ac.tuwien.dse.core.db.DAOFactory;
-import at.ac.tuwien.dse.core.db.DoctorDAO;
-import at.ac.tuwien.dse.core.db.HospitalDAO;
-import at.ac.tuwien.dse.core.db.HospitalEmployeeDAO;
-import at.ac.tuwien.dse.core.db.NotificationDAO;
-import at.ac.tuwien.dse.core.db.OperationTypeDAO;
-import at.ac.tuwien.dse.core.db.PatientDAO;
-import at.ac.tuwien.dse.core.db.TimeSlotDAO;
-import at.ac.tuwien.dse.core.db.UserDAO;
-import at.ac.tuwien.dse.core.message.NotificationMessage;
-import at.ac.tuwien.dse.core.model.Doctor;
-import at.ac.tuwien.dse.core.model.Hospital;
-import at.ac.tuwien.dse.core.model.HospitalEmployee;
-import at.ac.tuwien.dse.core.model.Notification;
-import at.ac.tuwien.dse.core.model.OperationType;
-import at.ac.tuwien.dse.core.model.Patient;
-import at.ac.tuwien.dse.core.model.TimeSlot;
-import at.ac.tuwien.dse.core.model.User;
-import at.ac.tuwien.dse.messenger.util.Config;
-import at.ac.tuwien.dse.messenger.util.NotificationStrings;
+import dse.core.db.DAOFactory;
+import dse.core.db.DoctorDAO;
+import dse.core.db.HospitalDAO;
+import dse.core.db.HospitalEmployeeDAO;
+import dse.core.db.NotificationDAO;
+import dse.core.db.OperationTypeDAO;
+import dse.core.db.PatientDAO;
+import dse.core.db.TimeSlotDAO;
+import dse.core.db.UserDAO;
+import dse.core.message.NotificationMessage;
+import dse.core.model.Doctor;
+import dse.core.model.Hospital;
+import dse.core.model.HospitalEmployee;
+import dse.core.model.Notification;
+import dse.core.model.OperationType;
+import dse.core.model.Patient;
+import dse.core.model.TimeSlot;
+import dse.core.model.User;
+import dse.messenger.util.Config;
+import dse.messenger.util.NotificationStrings;
 
 import com.mongodb.DB;
 

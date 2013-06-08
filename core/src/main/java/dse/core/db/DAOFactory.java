@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.core.db;
+package dse.core.db;
 
 import com.mongodb.DB;
 

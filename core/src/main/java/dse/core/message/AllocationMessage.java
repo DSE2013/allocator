@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.core.message;
+package dse.core.message;
 
 public class AllocationMessage extends Message {
 	private static final long serialVersionUID = 5115203031923646206L;

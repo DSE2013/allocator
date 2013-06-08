@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.core.message;
+package dse.core.message;
 
 public class DeletionMessage extends Message {
 	private static final long serialVersionUID = 6974338581864888070L;

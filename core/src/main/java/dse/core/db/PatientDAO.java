@@ -1,8 +1,8 @@
-package at.ac.tuwien.dse.core.db;
+package dse.core.db;
 
 
-import at.ac.tuwien.dse.core.model.Patient;
-import at.ac.tuwien.dse.core.util.Config;
+import dse.core.model.Patient;
+import dse.core.util.Config;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;

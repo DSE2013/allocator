@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.core.messagequeue;
+package dse.core.messagequeue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import at.ac.tuwien.dse.core.message.Message;
-import at.ac.tuwien.dse.core.message.NotificationMessage;
+import dse.core.message.Message;
+import dse.core.message.NotificationMessage;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

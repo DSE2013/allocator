@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.messenger;
+package dse.messenger;
 
 import java.io.IOException;
 

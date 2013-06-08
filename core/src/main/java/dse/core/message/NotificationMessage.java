@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.core.message;
+package dse.core.message;
 
 public class NotificationMessage extends Message {
 	private static final long serialVersionUID = 257368406584227756L;

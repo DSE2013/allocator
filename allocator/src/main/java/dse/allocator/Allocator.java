@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.allocator;
+package dse.allocator;
 
 import java.io.IOException;
 

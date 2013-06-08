@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.messenger.util;
+package dse.messenger.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

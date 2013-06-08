@@ -1,11 +1,11 @@
-package at.ac.tuwien.dse.messenger;
+package dse.messenger;
 
 import java.io.IOException;
 
-import at.ac.tuwien.dse.core.message.NotificationMessage;
-import at.ac.tuwien.dse.core.messagequeue.MessageQueueHelper;
-import at.ac.tuwien.dse.core.util.Config;
-import at.ac.tuwien.dse.messenger.controller.NotificationManager;
+import dse.core.message.NotificationMessage;
+import dse.core.messagequeue.MessageQueueHelper;
+import dse.core.util.Config;
+import dse.messenger.controller.NotificationManager;
 
 import com.mongodb.DB;
 import com.mongodb.DBAddress;
