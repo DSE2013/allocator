@@ -1,4 +1,4 @@
-package at.ac.tuwien.dse.core.dao;
+package dse.core.dao;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,10 +10,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
-import at.ac.tuwien.dse.core.db.DAOFactory;
-import at.ac.tuwien.dse.core.db.TimeSlotDAO;
-import at.ac.tuwien.dse.core.model.TimeSlot;
-import at.ac.tuwien.dse.core.util.Config;
+import dse.core.db.DAOFactory;
+import dse.core.db.TimeSlotDAO;
+import dse.core.model.TimeSlot;
+import dse.core.util.Config;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
