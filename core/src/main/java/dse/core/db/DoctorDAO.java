@@ -1,11 +1,11 @@
 package dse.core.db;
 
 
-import dse.core.model.Doctor;
-import dse.core.util.Config;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+
+import dse.core.model.Doctor;
+import dse.core.util.Config;
 
 public class DoctorDAO extends BasicDAO {
 	private UserDAO userDAO;

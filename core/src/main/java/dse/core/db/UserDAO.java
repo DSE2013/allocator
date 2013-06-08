@@ -1,12 +1,12 @@
 package dse.core.db;
 
 
-import dse.core.model.User;
-import dse.core.util.Config;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
+
+import dse.core.model.User;
+import dse.core.util.Config;
 
 public class UserDAO extends BasicDAO {
 	public UserDAO(DB db) {

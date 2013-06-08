@@ -1,4 +1,4 @@
-package dse.allocator.controller;
+package dse.core.dao;
 
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
@@ -7,7 +7,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import org.junit.BeforeClass;
-import org.junit.Test;
+
+import com.mongodb.DB;
+import com.mongodb.DBAddress;
+import com.mongodb.Mongo;
 
 import dse.core.db.DAOFactory;
 import dse.core.db.DoctorDAO;
@@ -23,10 +26,6 @@ import dse.core.model.OperationType;
 import dse.core.model.Patient;
 import dse.core.model.TimeSlot;
 import dse.core.util.Config;
-
-import com.mongodb.DB;
-import com.mongodb.DBAddress;
-import com.mongodb.Mongo;
 
 
 public abstract class Test_AbstractTest {
@@ -279,11 +278,6 @@ public abstract class Test_AbstractTest {
 		ts6.setStart(sdf.parse("30.06.2013 10:00"));
 		ts6.setEnd(sdf.parse("30.06.2013 10:30"));
 		tsDao.persist(ts6);
-	}
-	
-	@Test
-	public void test() {
-		
 	}
 	
 	private static byte[] getPassword(String pw) {

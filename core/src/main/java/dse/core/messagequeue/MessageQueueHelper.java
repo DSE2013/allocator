@@ -6,15 +6,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import dse.core.message.Message;
-import dse.core.message.NotificationMessage;
-
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.ShutdownSignalException;
+
+import dse.core.message.Message;
+import dse.core.message.NotificationMessage;
 
 public class MessageQueueHelper implements IMessageQueueHelper {
 	

@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import org.junit.Before;
 import org.junit.Test;
 
+import dse.core.dao.Test_AbstractTest;
 import dse.core.db.HospitalDAO;
 import dse.core.model.Hospital;
 import dse.core.model.TimeSlot;

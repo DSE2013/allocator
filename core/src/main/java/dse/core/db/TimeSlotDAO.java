@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-import dse.core.model.TimeSlot;
-import dse.core.util.Config;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+
+import dse.core.model.TimeSlot;
+import dse.core.util.Config;
 
 public class TimeSlotDAO extends BasicDAO {
 	public TimeSlotDAO(DB db) {

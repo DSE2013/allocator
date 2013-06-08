@@ -3,13 +3,13 @@ package dse.core.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import dse.core.model.HospitalEmployee;
-import dse.core.util.Config;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+
+import dse.core.model.HospitalEmployee;
+import dse.core.util.Config;
 
 public class HospitalEmployeeDAO extends BasicDAO {
 	private UserDAO userDAO;
